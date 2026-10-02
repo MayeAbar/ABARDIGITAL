@@ -118,6 +118,7 @@ function QrSim() {
   useEffect(() => {
     if (phase === "scan") { const t = setTimeout(() => setPhase("chat"), 1200); return () => clearTimeout(t); }
     if (phase === "chat") { setTyping(true); const t = setTimeout(() => setTyping(false), 1000); return () => clearTimeout(t); }
+    return undefined;
   }, [phase]);
   const start = () => phase === "idle" && setPhase("scan");
   return (
