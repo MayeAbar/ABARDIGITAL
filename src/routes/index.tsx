@@ -127,7 +127,7 @@ function QrSim() {
       <div className="mt-12 grid items-center gap-10 md:grid-cols-2">
         <button onMouseEnter={start} onClick={start} className="glass mx-auto rounded-3xl p-6 transition hover:shadow-neon">
           <img src="/images/qr_web.webp" alt="Código QR Abar Digital" className="w-64 rounded-2xl bg-foreground p-3 md:w-80" />
-          <span className="mt-4 block text-sm text-muted-foreground">{phase === "idle" ? "Toca para escanear" : <button onClick={() => setPhase("idle")} className="text-neon underline">Reiniciar</button>}</span>
+          <span className="mt-4 block text-sm text-muted-foreground">{phase === "idle" ? "Toca para escanear" : <span role="link" onClick={(e) => { e.stopPropagation(); setPhase("idle"); }} className="cursor-pointer text-neon underline">Reiniciar</span>}</span>
         </button>
         <div className="mx-auto h-[520px] w-[270px] rounded-[2.75rem] border-4 border-secondary bg-background p-3 shadow-neon">
           <div className="relative flex h-full flex-col overflow-hidden rounded-[2.1rem] bg-muted">
