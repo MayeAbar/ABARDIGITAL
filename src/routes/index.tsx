@@ -166,16 +166,16 @@ function QrSim() {
 }
 
 const services = [
-  { t: "Sistema de Ventas Automatizado PRO", p: 149900, img: "/images/sistema_de_venta_automatizado_pro.webp", star: true, d: "Todo tu negocio digitalizado en un solo paquete integral. Te entregamos un ecosistema completo para vender en piloto automático.", items: ["Landing Page Pro adaptada a celulares y PC.", "1 Año de Hosting Gratis (sin mensualidades ni costos ocultos).", "WhatsApp Profesional con mensajes automáticos de bienvenida y ausencia.", "Código QR Estratégico para tu local o empaques."] },
-  { t: "Landing Page de Lanzamiento", p: 79900, img: "/images/landing_page_de_lanzamiento.webp", d: "La forma más rápida y económica de tener presencia formal en internet y activar tus búsquedas locales en Google.", items: ["Web profesional de una sola página de alta velocidad.", "Incluye 1 año de dominio y hosting premium gratis.", "Cero mensualidades y cero costos ocultos de renovación.", "Botón con conexión directa y limpia a tu WhatsApp."] },
-  { t: "WhatsApp Automatizado PRO", p: 49900, img: "/images/WhatsApp_Automatizado_PRO.webp", d: "Transformamos tu teléfono en un vendedor que trabaja 24/7 en piloto automático para que no dejes escapar clientes.", items: ["Respuestas instantáneas en 1 segundo para recibir a tus prospectos.", "Atajos de teclado instalados para contestar preguntas frecuentes.", "Sistema de etiquetas Pro por colores para controlar pedidos y pagos."] },
-  { t: "Diseño de Identidad y Presencia Digital", p: 49900, img: "/images/identidad_marca.webp", d: "Creamos la imagen visual de tu empresa desde cero para que dejes de usar plantillas genéricas o fotos borrosas.", items: ["Logotipo corporativo premium en alta resolución.", "Definición de tu paleta de colores estratégicos y tipografías de marca.", "Guía visual optimizada para profesionalizar el feed de tu Instagram y redes sociales."] },
-  { t: "Código QR Profesional a Medida", p: 14900, img: "/images/codigo_qr_a_medida.webp", contain: true, checkout: true, d: "Conecta el mundo físico con tu negocio digital en un segundo. Imprímelo en tus tarjetas, empaques o vitrinas.", items: ["QR corporativo permanente personalizado con tus colores (nunca vence).", "Diseño de letrero digital atractivo listo para imprenta o mostrador.", "Enlaces inteligentes editables que puedes redirigir cuando quieras."] },
-  { t: "Pack de Prompts con IA para Negocios", p: 14900, img: "/images/pack_de_promt_con_ia_para_tu_negocio.webp", checkout: true, d: "Deja de adivinar qué escribirle a ChatGPT o Midjourney. Te entregamos la solución masticada y lista para usar.", items: ["Kit de instrucciones exactas (prompts) adaptadas 100% a tu rubro comercial.", "Fórmulas para generar imágenes de productos premium en un segundo.", "Plantillas de copiar y pegar para crear guiones de video y textos de venta."] },
+  { t: "Sistema de Ventas Automatizado PRO", p: 149900, mp: "https://mpago.la/2tjfinM", img: "/images/sistema_de_venta_automatizado_pro.webp", star: true, d: "Todo tu negocio digitalizado en un solo paquete integral. Te entregamos un ecosistema completo para vender en piloto automático.", items: ["Landing Page Pro adaptada a celulares y PC.", "1 Año de Hosting Gratis (sin mensualidades ni costos ocultos).", "WhatsApp Profesional con mensajes automáticos de bienvenida y ausencia.", "Código QR Estratégico para tu local o empaques."] },
+  { t: "Landing Page de Lanzamiento", p: 79900, mp: "https://mpago.la/1yqWGWq", img: "/images/landing_page_de_lanzamiento.webp", d: "La forma más rápida y económica de tener presencia formal en internet y activar tus búsquedas locales en Google.", items: ["Web profesional de una sola página de alta velocidad.", "Incluye 1 año de dominio y hosting premium gratis.", "Cero mensualidades y cero costos ocultos de renovación.", "Botón con conexión directa y limpia a tu WhatsApp."] },
+  { t: "WhatsApp Automatizado PRO", p: 49900, mp: "https://mpago.la/2TMah4Y", img: "/images/WhatsApp_Automatizado_PRO.webp", d: "Transformamos tu teléfono en un vendedor que trabaja 24/7 en piloto automático para que no dejes escapar clientes.", items: ["Respuestas instantáneas en 1 segundo para recibir a tus prospectos.", "Atajos de teclado instalados para contestar preguntas frecuentes.", "Sistema de etiquetas Pro por colores para controlar pedidos y pagos."] },
+  { t: "Diseño de Identidad y Presencia Digital", p: 49900, mp: "https://mpago.la/2f5wJ6w", img: "/images/identidad_marca.webp", d: "Creamos la imagen visual de tu empresa desde cero para que dejes de usar plantillas genéricas o fotos borrosas.", items: ["Logotipo corporativo premium en alta resolución.", "Definición de tu paleta de colores estratégicos y tipografías de marca.", "Guía visual optimizada para profesionalizar el feed de tu Instagram y redes sociales."] },
+  { t: "Código QR Profesional a Medida", p: 14900, mp: "https://mpago.la/2U7owwR", img: "/images/codigo_qr_a_medida.webp", contain: true, d: "Conecta el mundo físico con tu negocio digital en un segundo. Imprímelo en tus tarjetas, empaques o vitrinas.", items: ["QR corporativo permanente personalizado con tus colores (nunca vence).", "Diseño de letrero digital atractivo listo para imprenta o mostrador.", "Enlaces inteligentes editables que puedes redirigir cuando quieras."] },
+  { t: "Pack de Prompts con IA para Negocios", p: 14900, mp: "https://mpago.la/1SiEY4T", img: "/images/pack_de_promt_con_ia_para_tu_negocio.webp", d: "Deja de adivinar qué escribirle a ChatGPT o Midjourney. Te entregamos la solución masticada y lista para usar.", items: ["Kit de instrucciones exactas (prompts) adaptadas 100% a tu rubro comercial.", "Fórmulas para generar imágenes de productos premium en un segundo.", "Plantillas de copiar y pegar para crear guiones de video y textos de venta."] },
 ];
 
 function Services() {
-  const [sel, setSel] = useState<{ t: string; p: number } | null>(null);
+  const [sel, setSel] = useState<{ t: string; p: number; mp: string } | null>(null);
   return (
     <section id="servicios" className="mx-auto max-w-6xl px-5 py-16">
       <h2 className="text-center text-3xl font-extrabold md:text-4xl">Nuestros <span className="text-gradient">servicios</span></h2>
@@ -193,11 +193,7 @@ function Services() {
               <ul className="mt-4 flex-1 space-y-2 text-sm font-medium text-[var(--svc-text)]">
                 {s.items.map((i) => <li key={i} className="flex gap-2"><span className="text-[var(--svc-cta)]">✓</span><span>{i}</span></li>)}
               </ul>
-              {s.checkout ? (
-                <button type="button" onClick={() => setSel({ t: s.t, p: s.p })} className="svc-cta mt-6 w-full">Lo quiero</button>
-              ) : (
-                <a href={wa(`Hola, me interesa: ${s.t} (${clp(s.p)})`)} target="_blank" rel="noreferrer" className="svc-cta mt-6">Lo quiero</a>
-              )}
+              <button type="button" onClick={() => setSel({ t: s.t, p: s.p, mp: s.mp })} className="svc-cta mt-6 w-full">Lo quiero</button>
             </div>
           </article>
         ))}
@@ -207,7 +203,7 @@ function Services() {
   );
 }
 
-function CheckoutModal({ item, onClose }: { item: { t: string; p: number }; onClose: () => void }) {
+function CheckoutModal({ item, onClose }: { item: { t: string; p: number; mp: string }; onClose: () => void }) {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     const t = setTimeout(() => setLoading(false), 1500);
@@ -215,9 +211,6 @@ function CheckoutModal({ item, onClose }: { item: { t: string; p: number }; onCl
     window.addEventListener("keydown", k);
     return () => { clearTimeout(t); window.removeEventListener("keydown", k); };
   }, [onClose]);
-  const isPack = item.t.startsWith("Pack");
-  const product = isPack ? "Pack de Prompts IA - Abar Digital" : "Código QR Profesional";
-  const short = isPack ? "Pack de Prompts" : "Código QR Profesional";
   const methods = [
     { n: "Visa / Mastercard / Diners", Icon: CreditCard },
     { n: "Webpay / Redcompra", Icon: QrCode },
@@ -236,7 +229,7 @@ function CheckoutModal({ item, onClose }: { item: { t: string; p: number }; onCl
         <div className="p-6">
           <h3 className="font-sans text-xl font-bold tracking-normal">Paga de forma segura con Mercado Pago</h3>
           <div className="mt-5 space-y-3 rounded-xl border border-[var(--mp-line)] bg-[var(--mp-surface)] p-4 text-sm">
-            <div className="flex justify-between gap-4"><span className="text-[var(--mp-muted)]">Producto</span><span className="text-right font-semibold">{product}</span></div>
+            <div className="flex justify-between gap-4"><span className="text-[var(--mp-muted)]">Producto</span><span className="text-right font-semibold">{item.t}</span></div>
             <div className="flex justify-between border-t border-[var(--mp-line)] pt-3 text-base"><span className="font-semibold">Total a pagar</span><span className="font-extrabold">{clp(item.p)} CLP</span></div>
           </div>
           <p className="mt-5 text-xs font-semibold uppercase tracking-wide text-[var(--mp-muted)]">Medios de pago</p>
@@ -249,14 +242,14 @@ function CheckoutModal({ item, onClose }: { item: { t: string; p: number }; onCl
             ))}
           </ul>
           <div className="mt-5 flex items-center justify-center gap-3 text-sm text-[var(--mp-muted)]">
-            {loading ? (<><span className="h-6 w-6 animate-spin rounded-full border-[3px] border-[var(--mp-blue)] border-t-transparent" /> Procesando pago seguro…</>) : <span className="font-semibold text-[var(--mp-blue)]">✓ Pago validado</span>}
+            {loading ? (<><span className="h-6 w-6 animate-spin rounded-full border-[3px] border-[var(--mp-blue)] border-t-transparent" /> Procesando pago seguro…</>) : <span className="font-semibold text-[var(--mp-blue)]">✓ Checkout listo</span>}
           </div>
           <p className="mt-5 rounded-xl bg-[var(--mp-blue-soft)] p-4 text-center text-sm font-medium text-[var(--mp-ink)]">
-            ¡Prueba superada! Estás experimentando nuestro sistema de checkout automático en vivo. Tu negocio puede procesar ventas y recibir pagos con tarjeta exactamente igual que esto las 24 horas.
+            Al confirmar, se abrirá el checkout oficial de Mercado Pago en una pestaña nueva para completar tu pago con total seguridad.
           </p>
-          <a href={wa(`Hola Abar Digital, acabo de probar la demo del checkout en la web y quiero comprar el ${short} por ${clp(item.p)}.`)} target="_blank" rel="noreferrer" aria-disabled={loading}
+          <a href={item.mp} target="_blank" rel="noreferrer" aria-disabled={loading} onClick={loading ? (e) => e.preventDefault() : undefined}
             className={`mt-5 block rounded-lg bg-[var(--mp-blue)] py-3.5 text-center font-bold text-[var(--mp-bg)] transition hover:brightness-110 ${loading ? "pointer-events-none opacity-50" : ""}`}>
-            Continuar a WhatsApp para recibir mi producto
+            Confirmar y pagar con Mercado Pago
           </a>
         </div>
       </div>
