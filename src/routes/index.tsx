@@ -236,7 +236,7 @@ function CheckoutModal({ item, onClose }: { item: { t: string; p: number; mp: st
           <ul className="mt-2 divide-y divide-[var(--mp-line)] overflow-hidden rounded-xl border border-[var(--mp-line)]">
             {methods.map(({ n, Icon }) => (
               <li key={n} className="flex items-center gap-3 bg-[var(--mp-bg)] px-4 py-3 text-sm font-semibold">
-                <Icon size={22} strokeWidth={1.8} className="shrink-0 text-[#6B7280]" aria-hidden="true" />
+                <Icon size={22} strokeWidth={1.8} className="shrink-0 text-[var(--mp-muted)]" aria-hidden="true" />
                 <span>{n}</span>
               </li>
             ))}
