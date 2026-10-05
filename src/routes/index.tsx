@@ -209,32 +209,54 @@ function Services() {
 function CheckoutModal({ item, onClose }: { item: { t: string; p: number }; onClose: () => void }) {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    const t = setTimeout(() => setLoading(false), 2200);
+    const t = setTimeout(() => setLoading(false), 1500);
     const k = (e: KeyboardEvent) => e.key === "Escape" && onClose();
     window.addEventListener("keydown", k);
     return () => { clearTimeout(t); window.removeEventListener("keydown", k); };
   }, [onClose]);
-  const name = item.t.startsWith("Pack") ? "Pack de Prompts" : "QR Profesional";
+  const isPack = item.t.startsWith("Pack");
+  const product = isPack ? "Pack de Prompts IA - Abar Digital" : "Código QR Profesional";
+  const short = isPack ? "Pack de Prompts" : "Código QR Profesional";
+  const methods = [
+    { n: "VISA", c: "text-[#1a1f71] italic" },
+    { n: "Mastercard", c: "text-[#eb001b]" },
+    { n: "Diners", c: "text-[#004a97]" },
+    { n: "Webpay / Redcompra", c: "text-[var(--mp-ink)]" },
+    { n: "Dinero en cuenta MP", c: "text-[var(--mp-blue)]" },
+  ];
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center bg-background/80 p-4 backdrop-blur-sm" onClick={onClose} role="dialog" aria-modal="true">
-      <div onClick={(e) => e.stopPropagation()} className="animate-rise relative w-full max-w-md rounded-3xl border border-border bg-[var(--svc-card)] p-6 shadow-neon sm:p-8">
-        <button onClick={onClose} aria-label="Cerrar" className="absolute right-4 top-4 text-xl text-[var(--svc-text)] hover:text-[var(--svc-title)]">×</button>
-        <p className="text-xs font-semibold tracking-widest text-cyan">CHECKOUT SEGURO · DEMO</p>
-        <h3 className="mt-2 text-2xl font-extrabold text-[var(--svc-title)]">{item.t}</h3>
-        <div className="mt-6 space-y-2 rounded-2xl border border-border bg-background/60 p-4 text-sm text-[var(--svc-text)]">
-          <div className="flex justify-between"><span>Servicio</span><span>{clp(item.p)}</span></div>
-          <div className="flex justify-between"><span>Comisión</span><span>$0</span></div>
-          <div className="flex justify-between border-t border-border pt-2 text-base font-extrabold text-[var(--svc-title)]"><span>Total</span><span>{clp(item.p)} CLP</span></div>
+      <div onClick={(e) => e.stopPropagation()} className="animate-rise relative max-h-[92vh] w-full max-w-md overflow-y-auto rounded-2xl bg-[var(--mp-bg)] font-sans text-[var(--mp-ink)] shadow-2xl">
+        <div className="flex items-center justify-between bg-[var(--mp-blue)] px-5 py-4">
+          <div className="flex items-center gap-2 rounded-full bg-[var(--mp-bg)] px-3 py-1.5 text-sm font-extrabold text-[var(--mp-blue)]">
+            <span className="grid h-5 w-5 place-items-center rounded-full bg-[var(--mp-blue)] text-[10px] text-[var(--mp-bg)]">🤝</span>
+            mercado pago
+          </div>
+          <button onClick={onClose} aria-label="Cerrar" className="text-2xl leading-none text-[var(--mp-bg)]">×</button>
         </div>
-        <div className="mt-6 flex items-center justify-center gap-3 text-sm text-[var(--svc-text)]">
-          {loading ? (<><span className="h-6 w-6 animate-spin rounded-full border-2 border-cyan border-t-transparent" /> Validando sistema…</>) : <span className="text-neon">✓ Sistema validado</span>}
+        <div className="p-6">
+          <h3 className="font-sans text-xl font-bold tracking-normal">Paga de forma segura con Mercado Pago</h3>
+          <div className="mt-5 space-y-3 rounded-xl border border-[var(--mp-line)] bg-[var(--mp-surface)] p-4 text-sm">
+            <div className="flex justify-between gap-4"><span className="text-[var(--mp-muted)]">Producto</span><span className="text-right font-semibold">{product}</span></div>
+            <div className="flex justify-between border-t border-[var(--mp-line)] pt-3 text-base"><span className="font-semibold">Total a pagar</span><span className="font-extrabold">{clp(item.p)} CLP</span></div>
+          </div>
+          <p className="mt-5 text-xs font-semibold uppercase tracking-wide text-[var(--mp-muted)]">Medios de pago</p>
+          <div className="mt-2 flex flex-wrap gap-2">
+            {methods.map((m) => (
+              <span key={m.n} className={`rounded-md border border-[var(--mp-line)] bg-[var(--mp-bg)] px-2.5 py-1 text-xs font-extrabold ${m.c}`}>{m.n}</span>
+            ))}
+          </div>
+          <div className="mt-5 flex items-center justify-center gap-3 text-sm text-[var(--mp-muted)]">
+            {loading ? (<><span className="h-6 w-6 animate-spin rounded-full border-[3px] border-[var(--mp-blue)] border-t-transparent" /> Procesando pago seguro…</>) : <span className="font-semibold text-[var(--mp-blue)]">✓ Pago validado</span>}
+          </div>
+          <p className="mt-5 rounded-xl bg-[var(--mp-blue-soft)] p-4 text-center text-sm font-medium text-[var(--mp-ink)]">
+            ¡Prueba superada! Estás experimentando nuestro sistema de checkout automático en vivo. Tu negocio puede procesar ventas y recibir pagos con tarjeta exactamente igual que esto las 24 horas.
+          </p>
+          <a href={wa(`Hola Abar Digital, acabo de probar la demo del checkout en la web y quiero comprar el ${short} por ${clp(item.p)}.`)} target="_blank" rel="noreferrer" aria-disabled={loading}
+            className={`mt-5 block rounded-lg bg-[var(--mp-blue)] py-3.5 text-center font-bold text-[var(--mp-bg)] transition hover:brightness-110 ${loading ? "pointer-events-none opacity-50" : ""}`}>
+            Continuar a WhatsApp para recibir mi producto
+          </a>
         </div>
-        <p className="mt-6 rounded-2xl border border-cyan/40 bg-cyan/10 p-4 text-center text-sm font-semibold text-[var(--svc-title)]">
-          Estás experimentando nuestra automatización de checkout en vivo. Tu negocio puede procesar ventas automáticas exactamente igual que esto.
-        </p>
-        <a href={wa(`Hola Abar Digital, acabo de probar la demo del checkout en la web y quiero comprar el ${name} por ${clp(item.p)}.`)} target="_blank" rel="noreferrer" aria-disabled={loading} className={`svc-cta mt-6 ${loading ? "pointer-events-none opacity-50" : ""}`}>
-          Continuar a WhatsApp para registrar pedido
-        </a>
       </div>
     </div>
   );
