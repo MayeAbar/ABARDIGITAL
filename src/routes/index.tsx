@@ -219,11 +219,9 @@ function CheckoutModal({ item, onClose }: { item: { t: string; p: number }; onCl
   const product = isPack ? "Pack de Prompts IA - Abar Digital" : "Código QR Profesional";
   const short = isPack ? "Pack de Prompts" : "Código QR Profesional";
   const methods = [
-    { n: "VISA", c: "text-[#1a1f71] italic" },
-    { n: "Mastercard", c: "text-[#eb001b]" },
-    { n: "Diners", c: "text-[#004a97]" },
-    { n: "Webpay / Redcompra", c: "text-[var(--mp-ink)]" },
-    { n: "Dinero en cuenta MP", c: "text-[var(--mp-blue)]" },
+    { n: "Visa / Mastercard / Diners", Icon: CreditCard },
+    { n: "Webpay / Redcompra", Icon: QrCode },
+    { n: "Dinero en cuenta MP", Icon: Wallet },
   ];
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center bg-background/80 p-4 backdrop-blur-sm" onClick={onClose} role="dialog" aria-modal="true">
