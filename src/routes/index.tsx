@@ -240,11 +240,14 @@ function CheckoutModal({ item, onClose }: { item: { t: string; p: number }; onCl
             <div className="flex justify-between border-t border-[var(--mp-line)] pt-3 text-base"><span className="font-semibold">Total a pagar</span><span className="font-extrabold">{clp(item.p)} CLP</span></div>
           </div>
           <p className="mt-5 text-xs font-semibold uppercase tracking-wide text-[var(--mp-muted)]">Medios de pago</p>
-          <div className="mt-2 flex flex-wrap gap-2">
-            {methods.map((m) => (
-              <span key={m.n} className={`rounded-md border border-[var(--mp-line)] bg-[var(--mp-bg)] px-2.5 py-1 text-xs font-extrabold ${m.c}`}>{m.n}</span>
+          <ul className="mt-2 divide-y divide-[var(--mp-line)] overflow-hidden rounded-xl border border-[var(--mp-line)]">
+            {methods.map(({ n, Icon }) => (
+              <li key={n} className="flex items-center gap-3 bg-[var(--mp-bg)] px-4 py-3 text-sm font-semibold">
+                <Icon size={22} strokeWidth={1.8} className="shrink-0 text-[#6B7280]" aria-hidden="true" />
+                <span>{n}</span>
+              </li>
             ))}
-          </div>
+          </ul>
           <div className="mt-5 flex items-center justify-center gap-3 text-sm text-[var(--mp-muted)]">
             {loading ? (<><span className="h-6 w-6 animate-spin rounded-full border-[3px] border-[var(--mp-blue)] border-t-transparent" /> Procesando pago seguro…</>) : <span className="font-semibold text-[var(--mp-blue)]">✓ Pago validado</span>}
           </div>
