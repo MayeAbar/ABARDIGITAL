@@ -227,9 +227,9 @@ function CheckoutModal({ item, onClose }: { item: { t: string; p: number }; onCl
     <div className="fixed inset-0 z-[100] flex items-center justify-center bg-background/80 p-4 backdrop-blur-sm" onClick={onClose} role="dialog" aria-modal="true">
       <div onClick={(e) => e.stopPropagation()} className="animate-rise relative max-h-[92vh] w-full max-w-md overflow-y-auto rounded-2xl bg-[var(--mp-bg)] font-sans text-[var(--mp-ink)] shadow-2xl">
         <div className="flex items-center justify-between bg-[var(--mp-blue)] px-5 py-4">
-          <div className="flex items-center gap-2 rounded-full bg-[var(--mp-bg)] px-3 py-1.5 text-sm font-extrabold text-[var(--mp-blue)]">
-            <span className="grid h-5 w-5 place-items-center rounded-full bg-[var(--mp-blue)] text-[10px] text-[var(--mp-bg)]">🤝</span>
-            mercado pago
+          <div className="flex items-center gap-2 rounded-lg bg-[var(--mp-bg)] px-3 py-1.5 shadow-sm">
+            <span className="grid h-5 w-5 place-items-center rounded-full bg-[var(--mp-blue)] text-[11px] font-black leading-none text-[var(--mp-bg)]">mp</span>
+            <span className="text-sm font-extrabold tracking-tight text-[var(--mp-blue)]">mercado pago</span>
           </div>
           <button onClick={onClose} aria-label="Cerrar" className="text-2xl leading-none text-[var(--mp-bg)]">×</button>
         </div>
