@@ -45,6 +45,7 @@ function Index() {
       <Roi />
       <QrSim />
       <Services />
+      <AvatarWidget />
       <footer className="border-t border-border py-10">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-5 md:flex-row">
           <Logo size={48} />
@@ -168,11 +169,12 @@ const services = [
   { t: "Landing Page de Lanzamiento", p: 79900, img: "/images/landing_page_de_lanzamiento.webp", d: "La forma más rápida y económica de tener presencia formal en internet y activar tus búsquedas locales en Google.", items: ["Web profesional de una sola página de alta velocidad.", "Incluye 1 año de dominio y hosting premium gratis.", "Cero mensualidades y cero costos ocultos de renovación.", "Botón con conexión directa y limpia a tu WhatsApp."] },
   { t: "WhatsApp Automatizado PRO", p: 49900, img: "/images/WhatsApp_Automatizado_PRO.webp", d: "Transformamos tu teléfono en un vendedor que trabaja 24/7 en piloto automático para que no dejes escapar clientes.", items: ["Respuestas instantáneas en 1 segundo para recibir a tus prospectos.", "Atajos de teclado instalados para contestar preguntas frecuentes.", "Sistema de etiquetas Pro por colores para controlar pedidos y pagos."] },
   { t: "Diseño de Identidad y Presencia Digital", p: 49900, img: "/images/identidad_marca.webp", d: "Creamos la imagen visual de tu empresa desde cero para que dejes de usar plantillas genéricas o fotos borrosas.", items: ["Logotipo corporativo premium en alta resolución.", "Definición de tu paleta de colores estratégicos y tipografías de marca.", "Guía visual optimizada para profesionalizar el feed de tu Instagram y redes sociales."] },
-  { t: "Código QR Profesional a Medida", p: 14900, img: "/images/codigo_qr_a_medida.webp", contain: true, d: "Conecta el mundo físico con tu negocio digital en un segundo. Imprímelo en tus tarjetas, empaques o vitrinas.", items: ["QR corporativo permanente personalizado con tus colores (nunca vence).", "Diseño de letrero digital atractivo listo para imprenta o mostrador.", "Enlaces inteligentes editables que puedes redirigir cuando quieras."] },
-  { t: "Pack de Prompts con IA para Negocios", p: 14900, img: "/images/pack_de_promt_con_ia_para_tu_negocio.webp", d: "Deja de adivinar qué escribirle a ChatGPT o Midjourney. Te entregamos la solución masticada y lista para usar.", items: ["Kit de instrucciones exactas (prompts) adaptadas 100% a tu rubro comercial.", "Fórmulas para generar imágenes de productos premium en un segundo.", "Plantillas de copiar y pegar para crear guiones de video y textos de venta."] },
+  { t: "Código QR Profesional a Medida", p: 14900, img: "/images/codigo_qr_a_medida.webp", contain: true, checkout: true, d: "Conecta el mundo físico con tu negocio digital en un segundo. Imprímelo en tus tarjetas, empaques o vitrinas.", items: ["QR corporativo permanente personalizado con tus colores (nunca vence).", "Diseño de letrero digital atractivo listo para imprenta o mostrador.", "Enlaces inteligentes editables que puedes redirigir cuando quieras."] },
+  { t: "Pack de Prompts con IA para Negocios", p: 14900, img: "/images/pack_de_promt_con_ia_para_tu_negocio.webp", checkout: true, d: "Deja de adivinar qué escribirle a ChatGPT o Midjourney. Te entregamos la solución masticada y lista para usar.", items: ["Kit de instrucciones exactas (prompts) adaptadas 100% a tu rubro comercial.", "Fórmulas para generar imágenes de productos premium en un segundo.", "Plantillas de copiar y pegar para crear guiones de video y textos de venta."] },
 ];
 
 function Services() {
+  const [sel, setSel] = useState<{ t: string; p: number } | null>(null);
   return (
     <section id="servicios" className="mx-auto max-w-6xl px-5 py-16">
       <h2 className="text-center text-3xl font-extrabold md:text-4xl">Nuestros <span className="text-gradient">servicios</span></h2>
@@ -190,11 +192,72 @@ function Services() {
               <ul className="mt-4 flex-1 space-y-2 text-sm font-medium text-[var(--svc-text)]">
                 {s.items.map((i) => <li key={i} className="flex gap-2"><span className="text-[var(--svc-cta)]">✓</span><span>{i}</span></li>)}
               </ul>
-              <a href={wa(`Hola, me interesa: ${s.t} (${clp(s.p)})`)} target="_blank" rel="noreferrer" className="svc-cta mt-6">Lo quiero</a>
+              {s.checkout ? (
+                <button type="button" onClick={() => setSel({ t: s.t, p: s.p })} className="svc-cta mt-6 w-full">Lo quiero</button>
+              ) : (
+                <a href={wa(`Hola, me interesa: ${s.t} (${clp(s.p)})`)} target="_blank" rel="noreferrer" className="svc-cta mt-6">Lo quiero</a>
+              )}
             </div>
           </article>
         ))}
       </div>
+      {sel && <CheckoutModal item={sel} onClose={() => setSel(null)} />}
     </section>
+  );
+}
+
+function CheckoutModal({ item, onClose }: { item: { t: string; p: number }; onClose: () => void }) {
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    const t = setTimeout(() => setLoading(false), 2200);
+    const k = (e: KeyboardEvent) => e.key === "Escape" && onClose();
+    window.addEventListener("keydown", k);
+    return () => { clearTimeout(t); window.removeEventListener("keydown", k); };
+  }, [onClose]);
+  const name = item.t.startsWith("Pack") ? "Pack de Prompts" : "QR Profesional";
+  return (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-background/80 p-4 backdrop-blur-sm" onClick={onClose} role="dialog" aria-modal="true">
+      <div onClick={(e) => e.stopPropagation()} className="animate-rise relative w-full max-w-md rounded-3xl border border-border bg-[var(--svc-card)] p-6 shadow-neon sm:p-8">
+        <button onClick={onClose} aria-label="Cerrar" className="absolute right-4 top-4 text-xl text-[var(--svc-text)] hover:text-[var(--svc-title)]">×</button>
+        <p className="text-xs font-semibold tracking-widest text-cyan">CHECKOUT SEGURO · DEMO</p>
+        <h3 className="mt-2 text-2xl font-extrabold text-[var(--svc-title)]">{item.t}</h3>
+        <div className="mt-6 space-y-2 rounded-2xl border border-border bg-background/60 p-4 text-sm text-[var(--svc-text)]">
+          <div className="flex justify-between"><span>Servicio</span><span>{clp(item.p)}</span></div>
+          <div className="flex justify-between"><span>Comisión</span><span>$0</span></div>
+          <div className="flex justify-between border-t border-border pt-2 text-base font-extrabold text-[var(--svc-title)]"><span>Total</span><span>{clp(item.p)} CLP</span></div>
+        </div>
+        <div className="mt-6 flex items-center justify-center gap-3 text-sm text-[var(--svc-text)]">
+          {loading ? (<><span className="h-6 w-6 animate-spin rounded-full border-2 border-cyan border-t-transparent" /> Validando sistema…</>) : <span className="text-neon">✓ Sistema validado</span>}
+        </div>
+        <p className="mt-6 rounded-2xl border border-cyan/40 bg-cyan/10 p-4 text-center text-sm font-semibold text-[var(--svc-title)]">
+          Estás experimentando nuestra automatización de checkout en vivo. Tu negocio puede procesar ventas automáticas exactamente igual que esto.
+        </p>
+        <a href={wa(`Hola Abar Digital, acabo de probar la demo del checkout en la web y quiero comprar el ${name} por ${clp(item.p)}.`)} target="_blank" rel="noreferrer" aria-disabled={loading} className={`svc-cta mt-6 ${loading ? "pointer-events-none opacity-50" : ""}`}>
+          Continuar a WhatsApp para registrar pedido
+        </a>
+      </div>
+    </div>
+  );
+}
+
+function AvatarWidget() {
+  const [show, setShow] = useState(false);
+  const timer = { current: 0 as unknown as ReturnType<typeof setTimeout> };
+  return (
+    <div className="fixed bottom-5 right-5 z-[90] flex items-center gap-3">
+      <div className={`max-w-[220px] rounded-2xl border border-border bg-[var(--svc-card)] px-4 py-3 text-sm text-[var(--svc-title)] shadow-neon transition-all duration-300 sm:max-w-xs ${show ? "translate-x-0 opacity-100" : "pointer-events-none translate-x-3 opacity-0"}`}>
+        👋 Hablemos sobre tu negocio y llevémoslo al siguiente nivel
+      </div>
+      <a
+        href={wa("Hola Patricia, vi tu avatar en la web y quiero asesoría para automatizar mi negocio.")}
+        target="_blank" rel="noreferrer" aria-label="Hablar con Patricia por WhatsApp"
+        onMouseEnter={() => setShow(true)} onMouseLeave={() => setShow(false)}
+        onTouchStart={() => { timer.current = setTimeout(() => setShow(true), 350); }}
+        onTouchEnd={() => { clearTimeout(timer.current); setTimeout(() => setShow(false), 2500); }}
+        className="block h-[60px] w-[60px] shrink-0 overflow-hidden rounded-full border-2 border-cyan shadow-neon transition hover:scale-105"
+      >
+        <img src="/images/avatar_patricia.jpg" alt="Patricia, asesora de Abar Digital" className="h-full w-full scale-125 object-cover" />
+      </a>
+    </div>
   );
 }
