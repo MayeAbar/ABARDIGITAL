@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 
-const WA = "56900000000";
+const WA = "56934848427";
 const wa = (msg: string) => `https://wa.me/${WA}?text=${encodeURIComponent(msg)}`;
 const clp = (n: number) => "$" + Math.round(n).toLocaleString("es-CL");
 
