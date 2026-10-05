@@ -164,32 +164,33 @@ function QrSim() {
 }
 
 const services = [
-  { t: "Sistema de Ventas Automatizado PRO", p: 149900, img: "/images/sistema_de_venta_digital_pro.webp", pos: "center", items: ["Landing page", "Catálogo digital", "WhatsApp profesional instalado", "Código QR estratégico"], star: true },
-  { t: "Landing Page de Lanzamiento", p: 79900, img: "/images/landing_page.webp", pos: "center", items: ["Web profesional", "1 año de hosting gratis", "Diseño de alta velocidad", "Conexión directa a WhatsApp"] },
-  { t: "WhatsApp Automatizado PRO", p: 49900, img: "/images/sistema_de_venta_digital_pro.webp", pos: "78% 40%", zoom: true, items: ["Respuestas en 1 segundo", "Atajos para preguntas frecuentes", "Control de pedidos por colores"] },
-  { t: "Identidad Profesional y Contenido", p: 49900, img: "/images/promt_web.webp", pos: "center 40%", items: ["Logotipos corporativos premium", "Prompts avanzados de IA", "Guiones y automatización de videos"] },
+  { t: "Sistema de Ventas Automatizado PRO", p: 149900, img: "/images/sistema_de_venta_automatizado_pro.webp", star: true, d: "Todo tu negocio digitalizado en un solo paquete integral. Te entregamos un ecosistema completo para vender en piloto automático.", items: ["Landing Page Pro adaptada a celulares y PC.", "1 Año de Hosting Gratis (sin mensualidades ni costos ocultos).", "WhatsApp Profesional con mensajes automáticos de bienvenida y ausencia.", "Código QR Estratégico para tu local o empaques."] },
+  { t: "Landing Page de Lanzamiento", p: 79900, img: "/images/landing_page_de_lanzamiento.webp", d: "La forma más rápida y económica de tener presencia formal en internet y activar tus búsquedas locales en Google.", items: ["Web profesional de una sola página de alta velocidad.", "Incluye 1 año de dominio y hosting premium gratis.", "Cero mensualidades y cero costos ocultos de renovación.", "Botón con conexión directa y limpia a tu WhatsApp."] },
+  { t: "WhatsApp Automatizado PRO", p: 49900, img: "/images/WhatsApp_Automatizado_PRO.webp", d: "Transformamos tu teléfono en un vendedor que trabaja 24/7 en piloto automático para que no dejes escapar clientes.", items: ["Respuestas instantáneas en 1 segundo para recibir a tus prospectos.", "Atajos de teclado instalados para contestar preguntas frecuentes.", "Sistema de etiquetas Pro por colores para controlar pedidos y pagos."] },
+  { t: "Diseño de Identidad y Presencia Digital", p: 49900, img: "/images/identidad_marca.webp", d: "Creamos la imagen visual de tu empresa desde cero para que dejes de usar plantillas genéricas o fotos borrosas.", items: ["Logotipo corporativo premium en alta resolución.", "Definición de tu paleta de colores estratégicos y tipografías de marca.", "Guía visual optimizada para profesionalizar el feed de tu Instagram y redes sociales."] },
+  { t: "Código QR Profesional a Medida", p: 14900, img: "/images/codigo_qr_a_medida.webp", contain: true, d: "Conecta el mundo físico con tu negocio digital en un segundo. Imprímelo en tus tarjetas, empaques o vitrinas.", items: ["QR corporativo permanente personalizado con tus colores (nunca vence).", "Diseño de letrero digital atractivo listo para imprenta o mostrador.", "Enlaces inteligentes editables que puedes redirigir cuando quieras."] },
+  { t: "Pack de Prompts con IA para Negocios", p: 14900, img: "/images/pack_de_promt_con_ia_para_tu_negocio.webp", d: "Deja de adivinar qué escribirle a ChatGPT o Midjourney. Te entregamos la solución masticada y lista para usar.", items: ["Kit de instrucciones exactas (prompts) adaptadas 100% a tu rubro comercial.", "Fórmulas para generar imágenes de productos premium en un segundo.", "Plantillas de copiar y pegar para crear guiones de video y textos de venta."] },
 ];
 
 function Services() {
   return (
     <section id="servicios" className="mx-auto max-w-6xl px-5 py-16">
-      <h2 className="text-center text-3xl font-bold md:text-4xl">Nuestros <span className="text-gradient">servicios</span></h2>
-      <div className="mt-12 grid gap-6 sm:grid-cols-2">
+      <h2 className="text-center text-3xl font-extrabold md:text-4xl">Nuestros <span className="text-gradient">servicios</span></h2>
+      <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {services.map((s) => (
-          <article key={s.t} className="glass group flex flex-col overflow-hidden rounded-3xl transition hover:-translate-y-1 hover:shadow-neon">
-            <div className="relative h-56 overflow-hidden">
-              <img src={s.img} alt={s.t} loading="lazy" className="h-full w-full object-cover transition duration-500 group-hover:scale-105" style={{ objectPosition: s.pos, transform: s.zoom ? "scale(2.2)" : undefined }} />
-              {s.star && <span className="absolute right-4 top-4 rounded-full bg-gradient-neon px-3 py-1 text-xs font-bold text-primary-foreground">MÁS VENDIDO</span>}
+          <article key={s.t} className="group flex flex-col overflow-hidden rounded-3xl border border-border bg-[var(--svc-card)] transition hover:-translate-y-1">
+            <div className={`relative aspect-[4/3] overflow-hidden ${s.contain ? "bg-[var(--svc-title)] p-6" : ""}`}>
+              <img src={s.img} alt={s.t} loading="lazy" className={`h-full w-full transition duration-500 group-hover:scale-105 ${s.contain ? "object-contain" : "object-cover"}`} />
+              {s.star && <span className="absolute right-4 top-4 rounded-full bg-[var(--svc-badge)] px-3 py-1 text-xs font-extrabold text-[var(--svc-cta-fg)]">MÁS VENDIDO</span>}
             </div>
             <div className="flex flex-1 flex-col p-6">
-              <h3 className="text-xl font-bold">{s.t}</h3>
-              <p className="mt-2 font-display text-3xl font-extrabold text-gradient">{clp(s.p)}</p>
-              <ul className="mt-4 flex-1 space-y-2 text-sm text-muted-foreground">
-                {s.items.map((i) => <li key={i}><span className="text-neon">✓</span> {i}</li>)}
+              <h3 className="text-xl font-extrabold text-[var(--svc-title)]">{s.t}</h3>
+              <p className="mt-2 font-display text-3xl font-extrabold text-[var(--svc-title)]">{clp(s.p)}</p>
+              <p className="mt-3 text-sm text-[var(--svc-text)]">{s.d}</p>
+              <ul className="mt-4 flex-1 space-y-2 text-sm font-medium text-[var(--svc-text)]">
+                {s.items.map((i) => <li key={i} className="flex gap-2"><span className="text-[var(--svc-cta)]">✓</span><span>{i}</span></li>)}
               </ul>
-              <a href={wa(`Hola, me interesa: ${s.t} (${clp(s.p)})`)} target="_blank" rel="noreferrer" className="mt-6 rounded-full border border-neon py-3 text-center text-sm font-semibold text-neon transition hover:bg-neon hover:text-primary-foreground">
-                Lo quiero
-              </a>
+              <a href={wa(`Hola, me interesa: ${s.t} (${clp(s.p)})`)} target="_blank" rel="noreferrer" className="svc-cta mt-6">Lo quiero</a>
             </div>
           </article>
         ))}
