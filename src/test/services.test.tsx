@@ -2,7 +2,7 @@ import { act, cleanup, fireEvent, render, screen, within } from "@testing-librar
 import { afterEach, describe, expect, it, vi } from "vitest";
 
 import { ServiceCheckout } from "@/components/service-checkout";
-import { masterSolutions } from "@/lib/services";
+import { canConfirmPayment, masterSolutions } from "@/lib/services";
 
 afterEach(() => { cleanup(); vi.useRealTimers(); });
 
@@ -43,5 +43,20 @@ describe("Master solutions business rules", () => {
     expect(payment.getAttribute("aria-disabled")).toBe("false");
     expect(payment.getAttribute("href")).toBe("https://mpago.la/2dzfx5r");
     expect(payment.getAttribute("target")).toBe("_blank");
+  });
+
+  it.each([
+    ["software-clinico", 249000, 249900],
+    ["ventas-pro", 149000, 149900],
+  ])("blocks %s when the provider charges more than its offered price", (id, price, providerAmount) => {
+    const item = masterSolutions.find((entry) => entry.id === id);
+    if (!item) throw new Error(`Missing solution: ${id}`);
+    expect(item.price).toBe(price);
+    expect(item.mismatchedPaymentAmount).toBe(providerAmount);
+    expect(canConfirmPayment(item)).toBe(false);
+    expect(canConfirmPayment({ ...item, mismatchedPaymentAmount: price })).toBe(true);
+    render(<ServiceCheckout item={item} onClose={vi.fn()} />);
+    expect(within(screen.getByRole("dialog")).queryByRole("link")).toBeNull();
+    expect(screen.getByRole("button", { name: "Pago temporalmente no disponible" })).toBeDisabled();
   });
 });

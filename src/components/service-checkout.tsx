@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogClose, DialogDescription, DialogOverlay, DialogPortal, DialogTitle } from "@/components/ui/dialog";
-import { CHECKOUT_DELAY_MS, formatClp, type MasterSolution } from "@/lib/services";
+import { canConfirmPayment, CHECKOUT_DELAY_MS, formatClp, type MasterSolution } from "@/lib/services";
 
 export function ServiceCheckout({ item, onClose, onReturnFocus }: {
   item: MasterSolution;
@@ -12,6 +12,7 @@ export function ServiceCheckout({ item, onClose, onReturnFocus }: {
   onReturnFocus?: () => void;
 }) {
   const [loading, setLoading] = useState(true);
+  const paymentMatches = canConfirmPayment(item);
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), CHECKOUT_DELAY_MS);
     return () => clearTimeout(timer);
@@ -60,11 +61,12 @@ export function ServiceCheckout({ item, onClose, onReturnFocus }: {
             <div role="status" aria-live="polite" className="mt-3 flex min-h-9 items-center justify-center gap-2 text-sm text-payment">
               {loading ? <><span className="size-5 animate-spin rounded-full border-2 border-payment border-t-transparent" aria-hidden="true" /> Preparando checkout seguro…</> : <><LockKeyhole size={16} aria-hidden="true" /> Checkout listo</>}
             </div>
-            <Button asChild variant="payment" size="lg" className={`mt-3 h-auto min-h-12 w-full whitespace-normal px-4 py-3 text-center ${loading ? "pointer-events-none opacity-50" : ""}`}>
+            {!paymentMatches && <p role="alert" className="mt-3 border-l-2 border-destructive bg-payment-surface px-3 py-3 text-sm leading-relaxed text-payment-foreground">El enlace de Mercado Pago muestra {formatClp(item.mismatchedPaymentAmount ?? item.price)} CLP, un importe distinto a esta oferta. El pago está temporalmente pausado para evitar un cobro incorrecto.</p>}
+            {paymentMatches ? <Button asChild variant="payment" size="lg" className={`mt-3 h-auto min-h-12 w-full whitespace-normal px-4 py-3 text-center ${loading ? "pointer-events-none opacity-50" : ""}`}>
               <a href={item.paymentUrl} target="_blank" rel="noopener noreferrer" aria-disabled={loading} tabIndex={loading ? -1 : 0} onClick={(event) => { if (loading) event.preventDefault(); }}>
                 Confirmar y pagar <ArrowUpRight aria-hidden="true" />
               </a>
-            </Button>
+            </Button> : <Button variant="payment" size="lg" disabled className="mt-3 h-auto min-h-12 w-full whitespace-normal px-4 py-3 text-center">Pago temporalmente no disponible</Button>}
           </div>
         </Content>
       </DialogPortal>

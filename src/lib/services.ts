@@ -5,6 +5,7 @@ export interface MasterSolution {
   level: string;
   price: number;
   paymentUrl: string;
+  mismatchedPaymentAmount?: number;
   permanent?: boolean;
   featured?: boolean;
   endorsement?: string;
@@ -47,6 +48,7 @@ export const masterSolutions: MasterSolution[] = [
     level: "Nivel Clínico",
     price: 249000,
     paymentUrl: "https://mpago.la/2TMah4Y",
+    mismatchedPaymentAmount: 249900,
     endorsement: "Respaldado por Aqua Viva Spa",
     summary: "Toda tu gestión clínica centralizada, sin mensualidades operativas.",
     details: "Sistema interno autoadministrable de historias clínicas digitales con almacenamiento seguro en la nube. Incluye módulos avanzados de consentimiento informado con firma digital y agendamiento interactivo de citas por calendario, libre de mensualidades operativas.",
@@ -59,6 +61,7 @@ export const masterSolutions: MasterSolution[] = [
     level: "Más Vendido",
     price: 149000,
     paymentUrl: "https://mpago.la/2tjfinM",
+    mismatchedPaymentAmount: 149900,
     featured: true,
     summary: "Todo tu negocio digitalizado e interconectado para vender más.",
     details: "Todo tu negocio digitalizado e interconectado. Incluye el desarrollo de una Landing Page Pro de alta velocidad adaptada perfectamente a dispositivos móviles y PC, junto con la configuración de WhatsApp Profesional con respuestas instantáneas y atajos para preguntas frecuentes.",
@@ -90,3 +93,5 @@ export const masterSolutions: MasterSolution[] = [
 ];
 
 export const formatClp = (amount: number) => "$" + amount.toLocaleString("es-CL");
+
+export const canConfirmPayment = (item: MasterSolution) => item.mismatchedPaymentAmount === undefined || item.mismatchedPaymentAmount === item.price;
