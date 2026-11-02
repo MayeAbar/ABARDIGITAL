@@ -17,3 +17,10 @@
 - [x] Integrate all six authorized Mercado Pago links, including the confirmed clinical-software link; exclude the extra Landing Page link from this six-solution catalog.
 - [x] Verify the six dialogs, desktop/mobile layouts and existing sections; run relevant tests.
 - [ ] Enable Clinical and Sales payment confirmation after Mercado Pago amounts match the requested $249.000 and $149.000 (current provider amounts: $249.900 and $149.900; awaiting owner correction).
+
+# Digital maintenance
+
+- [ ] Add final maintenance section with four monthly/annual plans beneath the catalog; preserve all upper sections.
+- [ ] Resolve conflicting annual savings and monthly prices before showing discount claims.
+- [ ] Connect every plan and billing choice to the real WhatsApp with its exact price and terms.
+- [ ] Test plan prices, limits, support windows and WhatsApp messages; verify desktop/mobile tab switching.
