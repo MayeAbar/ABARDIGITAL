@@ -1,11 +1,19 @@
 import { QueryClient } from "@tanstack/react-query";
 import { createMemoryHistory, createRouter, RouterProvider } from "@tanstack/react-router";
 import { cleanup, render, waitFor } from "@testing-library/react";
+import { Fragment } from "react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
 import { routeTree } from "@/routeTree.gen";
+import { Route as rootRoute } from "@/routes/__root";
+
+// Start adds this runtime option; Router's standalone test types omit it.
+const documentShell = Reflect.get(rootRoute.options, "shellComponent");
 
 function renderAt(path: string) {
+  // RTL renders inside a div; the Start document shell belongs around the
+  // entire document, not inside the test container. Keep the real routes.
+  Reflect.set(rootRoute.options, "shellComponent", Fragment);
   const queryClient = new QueryClient();
   const router = createRouter({
     routeTree,
@@ -17,6 +25,7 @@ function renderAt(path: string) {
 
 afterEach(() => {
   cleanup();
+  Reflect.set(rootRoute.options, "shellComponent", documentShell);
   vi.restoreAllMocks();
 });
 
