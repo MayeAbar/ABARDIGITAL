@@ -44,6 +44,7 @@ function Index() {
       </header>
       <Hero />
       <Roi />
+      <Cases />
       <QrSim />
       <Services />
       <AvatarWidget />
@@ -111,6 +112,110 @@ function Roi() {
         </div>
       </div>
     </section>
+  );
+}
+
+const cases = [
+  {
+    n: "01",
+    t: "De Fragmentada a Soberana",
+    s: "Plataforma Premium para Marcas Personales e Infoproductores",
+    d: "Ecosistema digital con software a medida de automatización de contenidos, que transforma entradas de blog en guiones optimizados para Instagram y TikTok.",
+    items: [
+      "Ecosistema digital unificado para la marca personal.",
+      "Software a medida que automatiza la producción de contenidos.",
+      "Entradas de blog transformadas en guiones optimizados para Instagram y TikTok.",
+      "Control total de la tecnología, sin depender de plataformas ajenas.",
+    ],
+  },
+  {
+    n: "02",
+    t: "Aqua Viva Spa",
+    s: "Medicina Estética & Bienestar / Gestión Clínica",
+    d: "Ecosistema con software interno de historia clínica digital autoadministrable, firmas electrónicas y agendamiento en tiempo real en la nube.",
+    items: [
+      "Historia clínica digital autoadministrable por el propio equipo.",
+      "Firmas electrónicas para consentimientos y documentos del paciente.",
+      "Agendamiento de horas en tiempo real, alojado en la nube.",
+      "Gestión clínica centralizada en un solo ecosistema.",
+    ],
+  },
+  {
+    n: "03",
+    t: "EPA Evoluzione Antiusura",
+    s: "Presencia Corporativa e Ingeniería Web B2B",
+    d: "Arquitectura y desarrollo de plataforma corporativa para el sector industrial minero, optimizada para la exposición clara de soluciones tribológicas de alta resistencia y fichas de producto.",
+    items: [
+      "Arquitectura y desarrollo de plataforma corporativa B2B.",
+      "Estructura de contenidos pensada para el sector industrial minero.",
+      "Exposición clara de soluciones tribológicas de alta resistencia.",
+      "Fichas de producto técnicas, ordenadas y fáciles de consultar.",
+    ],
+  },
+  {
+    n: "04",
+    t: "JC Impresoras y PC",
+    s: "Soporte Técnico Especializado e Impresión",
+    d: "Plataforma local optimizada con flujos directos de cotización por WhatsApp y segmentación estratégica de servicios técnicos y software.",
+    items: [
+      "Plataforma local optimizada para clientes de la zona.",
+      "Flujos directos de cotización por WhatsApp.",
+      "Segmentación estratégica entre servicios técnicos y software.",
+      "Presencia digital formal que ordena la oferta de servicios.",
+    ],
+  },
+];
+
+function Cases() {
+  const [open, setOpen] = useState<(typeof cases)[number] | null>(null);
+  return (
+    <section id="casos" className="mx-auto max-w-6xl px-5 py-16">
+      <span className="block text-center text-xs font-semibold uppercase tracking-[0.25em] text-neon">Casos de éxito</span>
+      <h2 className="mt-4 text-center text-2xl font-extrabold uppercase leading-tight tracking-tight md:text-4xl">
+        Proyectos que ya trabajan con <span className="text-gradient">nuestra tecnología</span>
+      </h2>
+      <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {cases.map((c) => (
+          <article key={c.n} className="group flex flex-col rounded-3xl border border-border bg-[var(--svc-card)] p-6 transition hover:-translate-y-1 hover:border-neon/50">
+            <div className="flex items-center justify-between">
+              <span className="font-display text-xs font-extrabold uppercase tracking-[0.2em] text-cyan">Caso {c.n}</span>
+              <span className="h-2 w-2 rounded-full bg-neon shadow-neon" aria-hidden="true" />
+            </div>
+            <h3 className="mt-6 text-lg font-extrabold text-[var(--svc-title)]">{c.t}</h3>
+            <p className="mt-2 text-sm font-semibold text-[var(--svc-muted)]">{c.s}</p>
+            <p className="mt-4 flex-1 text-sm leading-relaxed text-[var(--svc-text)]">{c.d}</p>
+            <button type="button" onClick={() => setOpen(c)} className="case-cta mt-6 w-full">Ver Detalles</button>
+          </article>
+        ))}
+      </div>
+      {open && <CaseModal item={open} onClose={() => setOpen(null)} />}
+    </section>
+  );
+}
+
+function CaseModal({ item, onClose }: { item: (typeof cases)[number]; onClose: () => void }) {
+  useEffect(() => {
+    const k = (e: KeyboardEvent) => e.key === "Escape" && onClose();
+    window.addEventListener("keydown", k);
+    return () => window.removeEventListener("keydown", k);
+  }, [onClose]);
+  return (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-background/80 p-4 backdrop-blur-sm" onClick={onClose} role="dialog" aria-modal="true" aria-labelledby="case-title">
+      <div onClick={(e) => e.stopPropagation()} className="animate-rise glass relative max-h-[92vh] w-full max-w-lg overflow-y-auto rounded-2xl p-6 md:p-8">
+        <button type="button" onClick={onClose} aria-label="Cerrar" className="absolute right-4 top-4 grid h-9 w-9 place-items-center rounded-full border border-border text-xl leading-none text-[var(--svc-text)] transition hover:border-neon/60 hover:text-neon">×</button>
+        <span className="text-xs font-extrabold uppercase tracking-[0.2em] text-cyan">Caso de éxito · {item.n}</span>
+        <h3 id="case-title" className="mt-3 pr-10 text-2xl font-extrabold text-[var(--svc-title)] md:text-3xl">{item.t}</h3>
+        <p className="mt-2 text-sm font-semibold text-neon">{item.s}</p>
+        <p className="mt-5 text-sm leading-relaxed text-[var(--svc-text)]">{item.d}</p>
+        <p className="mt-6 text-xs font-semibold uppercase tracking-widest text-muted-foreground">Qué incluye el proyecto</p>
+        <ul className="mt-3 space-y-2 text-sm font-medium text-[var(--svc-text)]">
+          {item.items.map((i) => <li key={i} className="flex gap-2"><span className="text-neon">✓</span><span>{i}</span></li>)}
+        </ul>
+        <a href={wa(`Hola Abar Digital, vi el caso "${item.t}" y quiero un proyecto así para mi negocio.`)} target="_blank" rel="noreferrer" className="btn-neon mt-8 !py-3 text-sm">
+          Quiero un proyecto así →
+        </a>
+      </div>
+    </div>
   );
 }
 
