@@ -38,6 +38,18 @@
   --color-chat: var(--chat);
   --color-case-study: var(--svc-card);
   --color-case-study-foreground: var(--svc-text);
+  --color-solution-surface: var(--svc-card);
+  --color-solution-foreground: var(--svc-text);
+  --color-solution-muted: var(--svc-muted);
+  --color-solution-cta: var(--svc-cta);
+  --color-solution-cta-foreground: var(--svc-cta-fg);
+  --color-payment: var(--mp-blue);
+  --color-payment-soft: var(--mp-blue-soft);
+  --color-payment-background: var(--mp-bg);
+  --color-payment-surface: var(--mp-surface);
+  --color-payment-foreground: var(--mp-ink);
+  --color-payment-muted: var(--mp-muted);
+  --color-payment-border: var(--mp-line);
 }
 
 :root {
@@ -154,4 +166,11 @@ input[type="range"].neon-range { accent-color: var(--neon); }
   --mp-ink: #000000;
   --mp-muted: #1f2937;
   --mp-line: #e5e5e5;
+}
+
+/* Scoped to the catalog; existing sections retain their own typography. */
+#servicios h2, #servicios h3, .solution-checkout h2 { letter-spacing: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  #servicios *, .solution-checkout * { transition: none; }
 }
