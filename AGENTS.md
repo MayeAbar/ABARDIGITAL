@@ -14,3 +14,7 @@
 - Aqua Viva Spa screenshots are physical PNG files in `public/assets/cases/aquaviva/`, referenced as `/assets/cases/aquaviva/hero.png`, `/assets/cases/aquaviva/agendamiento.png`, and `/assets/cases/aquaviva/sistema-interno.png`; public paths persist across GitHub/Vercel deployments without relying on CDN assets.
 - De Fragmentada a Soberana uses physical screenshots under `public/assets/cases/soberana/` and an extension-agnostic image list with intrinsic dimensions and deferred secondary loading, preserving deployment portability and avoiding image distortion.
 - JC Impresoras y PC uses physical WebP screenshots under `public/assets/cases/jcimpresoras/` (`hero.webp`, `formulario.webp`) with the same extension-agnostic, intrinsic-dimension pattern as the other case studies.
+
+## Service catalog
+- Keep the service catalog and accessible quick checkout in dedicated components backed by one browser-safe service-data module; pricing, ordering and authorized payment destinations stay synchronized and testable without modifying upper page sections.
+- Catalog and payment controls use semantic tokens and shared Button variants; dialogs use Radix focus management and block payment confirmation until the configured preparation delay ends.

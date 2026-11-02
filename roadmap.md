@@ -12,7 +12,8 @@
 
 # Six master solutions
 
-- [ ] Replace the prior catalog with six symmetric cards in descending current-price order; preserve all upper sections.
-- [ ] Update quick checkout with exact product names and prices, retaining its loading delay.
-- [ ] Integrate the five newly authorized Mercado Pago links; request the missing clinical-software link and exclude the extra Landing Page link from this six-solution catalog.
-- [ ] Verify the six dialogs, desktop/mobile layouts and existing sections; run relevant tests.
+- [x] Replace the prior catalog with six symmetric cards in descending current-price order; preserve all upper sections.
+- [x] Update quick checkout with exact product names and prices, retaining its loading delay.
+- [x] Integrate all six authorized Mercado Pago links, including the confirmed clinical-software link; exclude the extra Landing Page link from this six-solution catalog.
+- [x] Verify the six dialogs, desktop/mobile layouts and existing sections; run relevant tests.
+- [ ] Enable Clinical and Sales payment confirmation after Mercado Pago amounts match the requested $249.000 and $149.000 (current provider amounts: $249.900 and $149.900; awaiting owner correction).
