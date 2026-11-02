@@ -6,6 +6,6 @@
 
 # De Fragmentada a Soberana
 
-- [ ] Save the three uploaded WebP screenshots at permanent public project paths.
-- [ ] Customize only this case's modal with the supplied title, copy and dark/silver/neon styling.
-- [ ] Verify all three images, opening/closing, desktop/mobile layout and unchanged neighboring cases; run existing tests.
+- [x] Save the three uploaded WebP screenshots at permanent public project paths.
+- [x] Customize only this case's modal with the supplied title, copy and dark/silver/neon styling.
+- [x] Verify all three images, opening/closing, desktop/mobile layout and unchanged neighboring cases; run existing tests.
