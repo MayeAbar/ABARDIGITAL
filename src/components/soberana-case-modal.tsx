@@ -21,11 +21,11 @@ const screenshots = [
     caption: "01 / Presencia digital · De Fragmentada a Soberana",
   },
   {
-    src: "/assets/cases/soberana/hero-2.webp",
-    alt: "Vista adicional de la página principal de De Fragmentada a Soberana",
-    width: 1920,
-    height: 947,
-    caption: "02 / Ecosistema web · Vista principal",
+    src: "/assets/cases/soberana/ediciones.webp",
+    alt: "Panel interno de ediciones de De Fragmentada a Soberana, con racha editorial y formulario de publicación para diario, TikTok e Instagram",
+    width: 1903,
+    height: 946,
+    caption: "02 / Panel interno · Ediciones y publicación de contenidos",
   },
   {
     src: "/assets/cases/soberana/acceso-privado.webp",
