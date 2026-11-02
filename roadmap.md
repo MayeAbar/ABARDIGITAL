@@ -9,3 +9,10 @@
 - [x] Save the three uploaded WebP screenshots at permanent public project paths.
 - [x] Customize only this case's modal with the supplied title, copy and dark/silver/neon styling.
 - [x] Verify all three images, opening/closing, desktop/mobile layout and unchanged neighboring cases; run existing tests.
+
+# Six master solutions
+
+- [ ] Replace the prior catalog with six symmetric cards in descending current-price order; preserve all upper sections.
+- [ ] Update quick checkout with exact product names and prices, retaining its loading delay.
+- [ ] Confirm matching checkout destinations; historical payment links charge different products/prices (awaiting user choice).
+- [ ] Verify the six dialogs, desktop/mobile layouts and existing sections; run relevant tests.
