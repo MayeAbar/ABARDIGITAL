@@ -36,6 +36,8 @@
   --color-cyan: var(--cyan);
   --color-electric: var(--electric);
   --color-chat: var(--chat);
+  --color-case-study: var(--svc-card);
+  --color-case-study-foreground: var(--svc-text);
 }
 
 :root {
