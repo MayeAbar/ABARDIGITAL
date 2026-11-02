@@ -8,3 +8,7 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+## Case studies
+- Keep client-specific case-study presentations in dedicated components and select them only for the matching case, so other case dialogs and page sections stay unchanged.
+- Aqua Viva Spa screenshots are physical PNG files in `public/assets/cases/aquaviva/`, referenced as `/assets/cases/aquaviva/hero.png`, `/assets/cases/aquaviva/agendamiento.png`, and `/assets/cases/aquaviva/sistema-interno.png`; public paths persist across GitHub/Vercel deployments without relying on CDN assets.
