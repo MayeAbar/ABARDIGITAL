@@ -20,7 +20,7 @@
 
 # Digital maintenance
 
-- [ ] Add final maintenance section with four monthly/annual plans beneath the catalog; preserve all upper sections.
-- [ ] Resolve conflicting annual savings and monthly prices before showing discount claims.
-- [ ] Connect every plan and billing choice to the real WhatsApp with its exact price and terms.
-- [ ] Test plan prices, limits, support windows and WhatsApp messages; verify desktop/mobile tab switching.
+- [x] Add final maintenance section with four monthly/annual plans beneath the catalog; preserve all upper sections.
+- [x] Resolve conflicting annual savings and monthly prices: keep all prices and show actual savings, without three-free-month claims.
+- [x] Connect every plan and billing choice to the real WhatsApp with its exact price and terms.
+- [x] Test plan prices, limits, support windows and WhatsApp messages; verify desktop/mobile tab switching.
