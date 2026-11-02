@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { ServicesCatalog } from "@/components/services-catalog";
+import { MaintenancePlans } from "@/components/maintenance-plans";
 import { AquaVivaCaseModal } from "@/components/aqua-viva-case-modal";
 import { JcImpresorasCaseModal } from "@/components/jc-impresoras-case-modal";
 import { SoberanaCaseModal } from "@/components/soberana-case-modal";
@@ -50,6 +51,7 @@ function Index() {
       <Cases />
       <QrSim />
       <ServicesCatalog />
+      <MaintenancePlans />
       <AvatarWidget />
       <footer className="border-t border-border py-10">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-5 md:flex-row">

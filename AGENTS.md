@@ -18,3 +18,6 @@
 ## Service catalog
 - Keep the service catalog and accessible quick checkout in dedicated components backed by one browser-safe service-data module; pricing, ordering and authorized payment destinations stay synchronized and testable without modifying upper page sections.
 - Catalog and payment controls use semantic tokens and shared Button variants; dialogs use Radix focus management and block payment confirmation until the configured preparation delay ends.
+
+## Maintenance plans
+- Keep maintenance pricing, service limits, billing terms and WhatsApp message generation in a separate browser-safe data module with an isolated tabbed section after the catalog; annual savings are derived from the selected annual price versus twelve current monthly payments, preventing stale discount claims.
