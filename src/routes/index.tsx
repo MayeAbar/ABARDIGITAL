@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { CreditCard, QrCode, Wallet } from "lucide-react";
+import { ServicesCatalog } from "@/components/services-catalog";
 import { AquaVivaCaseModal } from "@/components/aqua-viva-case-modal";
 import { JcImpresorasCaseModal } from "@/components/jc-impresoras-case-modal";
 import { SoberanaCaseModal } from "@/components/soberana-case-modal";
@@ -49,7 +49,7 @@ function Index() {
       <Roi />
       <Cases />
       <QrSim />
-      <Services />
+      <ServicesCatalog />
       <AvatarWidget />
       <footer className="border-t border-border py-10">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-5 md:flex-row">
@@ -276,98 +276,6 @@ function QrSim() {
         </div>
       </div>
     </section>
-  );
-}
-
-const services = [
-  { t: "Sistema de Ventas Automatizado PRO", p: 149900, mp: "https://mpago.la/2tjfinM", img: "/images/sistema_de_venta_automatizado_pro.webp", star: true, d: "Todo tu negocio digitalizado en un solo paquete integral. Te entregamos un ecosistema completo para vender en piloto automático.", items: ["Landing Page Pro adaptada a celulares y PC.", "1 Año de Hosting Gratis (sin mensualidades ni costos ocultos).", "WhatsApp Profesional con mensajes automáticos de bienvenida y ausencia.", "Código QR Estratégico para tu local o empaques."] },
-  { t: "Landing Page de Lanzamiento", p: 79900, mp: "https://mpago.la/1yqWGWq", img: "/images/landing_page_de_lanzamiento.webp", d: "La forma más rápida y económica de tener presencia formal en internet y activar tus búsquedas locales en Google.", items: ["Web profesional de una sola página de alta velocidad.", "Incluye 1 año de dominio y hosting premium gratis.", "Cero mensualidades y cero costos ocultos de renovación.", "Botón con conexión directa y limpia a tu WhatsApp."] },
-  { t: "WhatsApp Automatizado PRO", p: 49900, mp: "https://mpago.la/2TMah4Y", img: "/images/WhatsApp_Automatizado_PRO.webp", d: "Transformamos tu teléfono en un vendedor que trabaja 24/7 en piloto automático para que no dejes escapar clientes.", items: ["Respuestas instantáneas en 1 segundo para recibir a tus prospectos.", "Atajos de teclado instalados para contestar preguntas frecuentes.", "Sistema de etiquetas Pro por colores para controlar pedidos y pagos."] },
-  { t: "Diseño de Identidad y Presencia Digital", p: 49900, mp: "https://mpago.la/2f5wJ6w", img: "/images/identidad_marca.webp", d: "Creamos la imagen visual de tu empresa desde cero para que dejes de usar plantillas genéricas o fotos borrosas.", items: ["Logotipo corporativo premium en alta resolución.", "Definición de tu paleta de colores estratégicos y tipografías de marca.", "Guía visual optimizada para profesionalizar el feed de tu Instagram y redes sociales."] },
-  { t: "Código QR Profesional a Medida", p: 14900, mp: "https://mpago.la/2U7owwR", img: "/images/codigo_qr_a_medida.webp", contain: true, d: "Conecta el mundo físico con tu negocio digital en un segundo. Imprímelo en tus tarjetas, empaques o vitrinas.", items: ["QR corporativo permanente personalizado con tus colores (nunca vence).", "Diseño de letrero digital atractivo listo para imprenta o mostrador.", "Enlaces inteligentes editables que puedes redirigir cuando quieras."] },
-  { t: "Pack de Prompts con IA para Negocios", p: 14900, mp: "https://mpago.la/1SiEY4T", img: "/images/pack_de_promt_con_ia_para_tu_negocio.webp", d: "Deja de adivinar qué escribirle a ChatGPT o Midjourney. Te entregamos la solución masticada y lista para usar.", items: ["Kit de instrucciones exactas (prompts) adaptadas 100% a tu rubro comercial.", "Fórmulas para generar imágenes de productos premium en un segundo.", "Plantillas de copiar y pegar para crear guiones de video y textos de venta."] },
-];
-
-function Services() {
-  const [sel, setSel] = useState<{ t: string; p: number; mp: string } | null>(null);
-  return (
-    <section id="servicios" className="mx-auto max-w-6xl px-5 py-16">
-      <h2 className="text-center text-3xl font-extrabold md:text-4xl">Nuestros <span className="text-gradient">servicios</span></h2>
-      <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {services.map((s) => (
-          <article key={s.t} className="group flex flex-col overflow-hidden rounded-3xl border border-border bg-[var(--svc-card)] transition hover:-translate-y-1">
-            <div className={`relative aspect-[4/3] overflow-hidden ${s.contain ? "bg-[var(--svc-title)] p-6" : ""}`}>
-              <img src={s.img} alt={s.t} loading="lazy" className={`h-full w-full transition duration-500 group-hover:scale-105 ${s.contain ? "object-contain" : "object-cover"}`} />
-              {s.star && <span className="absolute right-4 top-4 rounded-full bg-[var(--svc-badge)] px-3 py-1 text-xs font-extrabold text-[var(--svc-cta-fg)]">MÁS VENDIDO</span>}
-            </div>
-            <div className="flex flex-1 flex-col p-6">
-              <h3 className="text-xl font-extrabold text-[var(--svc-title)]">{s.t}</h3>
-              <p className="mt-2 font-display text-3xl font-extrabold text-[var(--svc-title)]">{clp(s.p)}</p>
-              <p className="mt-3 text-sm text-[var(--svc-text)]">{s.d}</p>
-              <ul className="mt-4 flex-1 space-y-2 text-sm font-medium text-[var(--svc-text)]">
-                {s.items.map((i) => <li key={i} className="flex gap-2"><span className="text-[var(--svc-cta)]">✓</span><span>{i}</span></li>)}
-              </ul>
-              <button type="button" onClick={() => setSel({ t: s.t, p: s.p, mp: s.mp })} className="svc-cta mt-6 w-full">Lo quiero</button>
-            </div>
-          </article>
-        ))}
-      </div>
-      {sel && <CheckoutModal item={sel} onClose={() => setSel(null)} />}
-    </section>
-  );
-}
-
-function CheckoutModal({ item, onClose }: { item: { t: string; p: number; mp: string }; onClose: () => void }) {
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    const t = setTimeout(() => setLoading(false), 1500);
-    const k = (e: KeyboardEvent) => e.key === "Escape" && onClose();
-    window.addEventListener("keydown", k);
-    return () => { clearTimeout(t); window.removeEventListener("keydown", k); };
-  }, [onClose]);
-  const methods = [
-    { n: "Visa / Mastercard / Diners", Icon: CreditCard },
-    { n: "Webpay / Redcompra", Icon: QrCode },
-    { n: "Dinero en cuenta MP", Icon: Wallet },
-  ];
-  return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-background/80 p-4 backdrop-blur-sm" onClick={onClose} role="dialog" aria-modal="true">
-      <div onClick={(e) => e.stopPropagation()} className="animate-rise relative max-h-[92vh] w-full max-w-md overflow-y-auto rounded-2xl bg-[var(--mp-bg)] font-sans text-[var(--mp-ink)] shadow-2xl">
-        <div className="flex items-center justify-between bg-[var(--mp-blue)] px-5 py-4">
-          <div className="flex items-center gap-2 rounded-lg bg-[var(--mp-bg)] px-3 py-1.5 shadow-sm">
-            <span className="grid h-5 w-5 place-items-center rounded-full bg-[var(--mp-blue)] text-[11px] font-black leading-none text-[var(--mp-bg)]">mp</span>
-            <span className="text-sm font-extrabold tracking-tight text-[var(--mp-blue)]">mercado pago</span>
-          </div>
-          <button onClick={onClose} aria-label="Cerrar" className="text-2xl leading-none text-[var(--mp-bg)]">×</button>
-        </div>
-        <div className="p-6">
-          <h3 className="font-sans text-xl font-bold tracking-normal">Paga de forma segura con Mercado Pago</h3>
-          <div className="mt-5 space-y-3 rounded-xl border border-[var(--mp-line)] bg-[var(--mp-surface)] p-4 text-sm">
-            <div className="flex justify-between gap-4"><span className="text-[var(--mp-muted)]">Producto</span><span className="text-right font-semibold">{item.t}</span></div>
-            <div className="flex justify-between border-t border-[var(--mp-line)] pt-3 text-base"><span className="font-semibold">Total a pagar</span><span className="font-extrabold">{clp(item.p)} CLP</span></div>
-          </div>
-          <p className="mt-5 text-xs font-semibold uppercase tracking-wide text-[var(--mp-muted)]">Medios de pago</p>
-          <ul className="mt-2 divide-y divide-[var(--mp-line)] overflow-hidden rounded-xl border border-[var(--mp-line)]">
-            {methods.map(({ n, Icon }) => (
-              <li key={n} className="flex items-center gap-3 bg-[var(--mp-bg)] px-4 py-3 text-sm font-semibold">
-                <Icon size={22} strokeWidth={1.8} className="shrink-0 text-[var(--mp-muted)]" aria-hidden="true" />
-                <span>{n}</span>
-              </li>
-            ))}
-          </ul>
-          <div className="mt-5 flex items-center justify-center gap-3 text-sm text-[var(--mp-muted)]">
-            {loading ? (<><span className="h-6 w-6 animate-spin rounded-full border-[3px] border-[var(--mp-blue)] border-t-transparent" /> Procesando pago seguro…</>) : <span className="font-semibold text-[var(--mp-blue)]">✓ Checkout listo</span>}
-          </div>
-          <p className="mt-5 rounded-xl bg-[var(--mp-blue-soft)] p-4 text-center text-sm font-medium text-[var(--mp-ink)]">
-            Al confirmar, se abrirá el checkout oficial de Mercado Pago en una pestaña nueva para completar tu pago con total seguridad.
-          </p>
-          <a href={item.mp} target="_blank" rel="noreferrer" aria-disabled={loading} onClick={loading ? (e) => e.preventDefault() : undefined}
-            className={`mt-5 block rounded-lg bg-[var(--mp-blue)] py-3.5 text-center font-bold text-[var(--mp-bg)] transition hover:brightness-110 ${loading ? "pointer-events-none opacity-50" : ""}`}>
-            Confirmar y pagar con Mercado Pago
-          </a>
-        </div>
-      </div>
-    </div>
   );
 }
 
