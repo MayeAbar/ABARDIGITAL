@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { CreditCard, QrCode, Wallet } from "lucide-react";
 import { AquaVivaCaseModal } from "@/components/aqua-viva-case-modal";
+import { JcImpresorasCaseModal } from "@/components/jc-impresoras-case-modal";
 import { SoberanaCaseModal } from "@/components/soberana-case-modal";
 
 const WA = "56934848427";
@@ -194,6 +195,8 @@ function Cases() {
         ? <SoberanaCaseModal onClose={() => setOpen(null)} contactUrl={wa(`Hola Abar Digital, vi el caso "${open.t}" y quiero un proyecto así para mi negocio.`)} />
         : open.n === "02"
         ? <AquaVivaCaseModal onClose={() => setOpen(null)} contactUrl={wa(`Hola Abar Digital, vi el caso "${open.t}" y quiero un proyecto así para mi negocio.`)} />
+        : open.n === "04"
+        ? <JcImpresorasCaseModal onClose={() => setOpen(null)} contactUrl={wa(`Hola Abar Digital, vi el caso "${open.t}" y quiero un proyecto así para mi negocio.`)} />
         : <CaseModal item={open} onClose={() => setOpen(null)} />)}
     </section>
   );
