@@ -12,7 +12,7 @@
 
 # Six master solutions
 
-- [ ] Replace the prior catalog with six symmetric cards in descending current-price order; preserve all upper sections.
-- [ ] Update quick checkout with exact product names and prices, retaining its loading delay.
-- [ ] Integrate all six authorized Mercado Pago links, including the confirmed clinical-software link; exclude the extra Landing Page link from this six-solution catalog.
-- [ ] Verify the six dialogs, desktop/mobile layouts and existing sections; run relevant tests.
+- [x] Replace the prior catalog with six symmetric cards in descending current-price order; preserve all upper sections.
+- [x] Update quick checkout with exact product names and prices, retaining its loading delay.
+- [x] Integrate all six authorized Mercado Pago links, including the confirmed clinical-software link; exclude the extra Landing Page link from this six-solution catalog.
+- [x] Verify the six dialogs, desktop/mobile layouts and existing sections; run relevant tests.
