@@ -14,5 +14,5 @@
 
 - [ ] Replace the prior catalog with six symmetric cards in descending current-price order; preserve all upper sections.
 - [ ] Update quick checkout with exact product names and prices, retaining its loading delay.
-- [ ] Confirm matching checkout destinations; historical payment links charge different products/prices (awaiting user choice).
+- [ ] Integrate the five newly authorized Mercado Pago links; request the missing clinical-software link and exclude the extra Landing Page link from this six-solution catalog.
 - [ ] Verify the six dialogs, desktop/mobile layouts and existing sections; run relevant tests.
