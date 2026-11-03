@@ -1,11 +1,11 @@
-import { ArrowUpRight, Bot, Check, Factory, Gift, MapPin, QrCode, ShieldCheck, ShoppingBag } from "lucide-react";
+import { ArrowUpRight, Bot, Check, Factory, Gift, MapPin, QrCode, ShieldCheck, ShoppingBag, Rocket } from "lucide-react";
 import { useRef, useState } from "react";
 
 import { ServiceCheckout } from "@/components/service-checkout";
 import { Button } from "@/components/ui/button";
 import { formatClp, masterSolutions, type MasterSolution } from "@/lib/services";
 
-const solutionIcons = { "premium-ia": Bot, "portal-b2b": Factory, "software-clinico": ShieldCheck, "ventas-pro": ShoppingBag, "presencia-total": MapPin, "qr-kit-ia": QrCode };
+const solutionIcons = { "premium-ia": Bot, "portal-b2b": Factory, "software-clinico": ShieldCheck, "ventas-pro": ShoppingBag, "presencia-total": MapPin, "landing-lanzamiento": Rocket, "qr-kit-ia": QrCode };
 
 export function ServicesCatalog() {
   const [selected, setSelected] = useState<MasterSolution | null>(null);
@@ -17,7 +17,7 @@ export function ServicesCatalog() {
         <div className="flex flex-col gap-5 border-b border-border pb-8 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <p className="text-xs font-bold uppercase text-neon">Catálogo · Abar Digital</p>
-            <h2 id="solutions-heading" className="mt-3 font-display text-3xl font-extrabold leading-tight md:text-4xl">6 Soluciones <span className="text-neon">Maestras</span></h2>
+            <h2 id="solutions-heading" className="mt-3 font-display text-3xl font-extrabold leading-tight md:text-4xl">7 Soluciones <span className="text-neon">Maestras</span></h2>
           </div>
           <p className="max-w-xs text-sm leading-relaxed text-solution-muted">Tecnología a medida para el siguiente nivel de tu negocio.</p>
         </div>
