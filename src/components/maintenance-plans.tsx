@@ -28,7 +28,7 @@ function PlanOptions({ billing }: { billing: MaintenanceBilling }) {
               <div className="mt-4 border-b border-border pb-5">
                 <p className="flex flex-wrap items-baseline gap-x-1.5 font-display text-3xl font-extrabold tabular-nums">{formatClp(annual ? plan.annualPrice : plan.monthlyPrice)} <span className="font-sans text-xs font-medium text-solution-muted">/ {annual ? "año" : "mes"}</span></p>
                 <p className="mt-2 text-xs text-solution-muted">CLP · {annual ? "Pago único" : plan.priceProtectionMonths === null ? "Precio permanente" : `Protegido por ${plan.priceProtectionMonths} meses`}</p>
-                <p className="mt-3 min-h-5 text-xs font-semibold text-neon">{annual ? `Ahorras ${formatClp(annualMaintenanceSavings(plan))} CLP al año*` : ""}</p>
+                <p className="mt-3 min-h-5 text-xs font-semibold text-neon">{annual ? (plan.id === "esencial" ? "Asegura tu alojamiento y mantén tu presencia digital activa todo el año" : `Ahorras ${formatClp(annualMaintenanceSavings(plan))} CLP al año*`) : ""}</p>
               </div>
               <ul className="mt-5 flex-1 space-y-3 text-sm leading-6">
                 {maintenanceInclusions(plan, billing).map((feature) => <li key={feature} className="flex items-start gap-2"><Check size={15} className="mt-1 shrink-0 text-neon" aria-hidden="true" /><span>{feature}</span></li>)}
