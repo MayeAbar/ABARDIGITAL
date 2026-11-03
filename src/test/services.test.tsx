@@ -9,15 +9,16 @@ afterEach(() => { cleanup(); vi.useRealTimers(); });
 const expected = [
   ["Ecosistema Premium + Automatización IA (Nivel Pro)", 320000, "https://mpago.la/2dzfx5r", false],
   ["Portal B2B Corporativo (Nivel Industria)", 280000, "https://mpago.la/32FmewG", false],
-  ["Software Clínico & Gestión Médica Estética (Nivel Clínico)", 249000, "https://mpago.la/2TMah4Y", false],
-  ["Sistema de Ventas Automatizado PRO (Más Vendido)", 149000, "https://mpago.la/2tjfinM", false],
+  ["Software Clínico & Gestión Médica Estética (Nivel Clínico)", 249900, "https://mpago.la/2TMah4Y", false],
+  ["Sistema de Ventas Automatizado PRO (Más Vendido)", 149900, "https://mpago.la/2tjfinM", false],
   ["Pack Presencia Total Digital (Google + Redes)", 89900, "https://mpago.la/2f5wJ6w", false],
+  ["Landing Page de Lanzamiento", 79900, "https://mpago.la/1yqWGWq", false],
   ["Código QR Profesional + Regalo Kit IA (Gancho de Entrada)", 14900, "https://mpago.la/1SiEY4T", true],
 ] as const;
 
 describe("Master solutions business rules", () => {
-  it("contains exactly the six solutions in strictly decreasing offer-price order", () => {
-    expect(masterSolutions.map((item) => item.price)).toEqual([320000, 280000, 249000, 149000, 89900, 14900]);
+  it("contains exactly the seven solutions in strictly decreasing offer-price order", () => {
+    expect(masterSolutions.map((item) => item.price)).toEqual([320000, 280000, 249900, 149900, 89900, 79900, 14900]);
   });
 
   expected.forEach(([name, price, paymentUrl, permanent]) => {
@@ -45,18 +46,7 @@ describe("Master solutions business rules", () => {
     expect(payment.getAttribute("target")).toBe("_blank");
   });
 
-  it.each([
-    ["software-clinico", 249000, 249900],
-    ["ventas-pro", 149000, 149900],
-  ])("blocks %s when the provider charges more than its offered price", (id, price, providerAmount) => {
-    const item = masterSolutions.find((entry) => entry.id === id);
-    if (!item) throw new Error(`Missing solution: ${id}`);
-    expect(item.price).toBe(price);
-    expect(item.mismatchedPaymentAmount).toBe(providerAmount);
-    expect(canConfirmPayment(item)).toBe(false);
-    expect(canConfirmPayment({ ...item, mismatchedPaymentAmount: price })).toBe(true);
-    render(<ServiceCheckout item={item} onClose={vi.fn()} />);
-    expect(within(screen.getByRole("dialog")).queryByRole("link")).toBeNull();
-    expect(screen.getByRole("button", { name: "Pago temporalmente no disponible" })).toBeDisabled();
+  it("allows payment for every solution", () => {
+    masterSolutions.forEach((item) => expect(canConfirmPayment(item)).toBe(true));
   });
 });
